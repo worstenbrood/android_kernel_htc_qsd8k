@@ -457,16 +457,12 @@ static struct regulator_consumer_supply tps65023_dcdc1_supplies[] = {
 static struct regulator_init_data tps65023_data[5] = {
 	{
 		.constraints = {
-			.name = "dcdc1", /* VREG_MSMC2_1V29 */
-			.min_uV = 975000,
-#ifdef CONFIG_JESUS_PHONE
-			.max_uV = 1350000,
-#else
-			.max_uV = 1275000,
-#endif
-			.valid_ops_mask = REGULATOR_CHANGE_VOLTAGE,
-		},
-		.consumer_supplies = tps65023_dcdc1_supplies,
+ 			.name = "dcdc1", /* VREG_MSMC2_1V29 */
+			.min_uV = BRAVO_TPS65023_MIN_UV_MV * 1000,
+			.max_uV = BRAVO_TPS65023_MAX_UV_MV * 1000,
+ 			.valid_ops_mask = REGULATOR_CHANGE_VOLTAGE,
+ 		},
+ 		.consumer_supplies = tps65023_dcdc1_supplies,
 		.num_consumer_supplies = ARRAY_SIZE(tps65023_dcdc1_supplies),
 	},
 	/* dummy values for unused regulators to not crash driver: */
